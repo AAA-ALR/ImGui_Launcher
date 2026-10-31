@@ -4,6 +4,10 @@
 
 启动时按屏幕高度算一次缩放，窗口尺寸随后固定。清单和代码里都声明了 Per-Monitor V2，按物理像素排版。
 
+## 预览
+
+![登录页](docs/preview.jpg)
+
 ## 构建
 
 需要 Visual Studio 2022（工具集 v143）、Windows SDK，以及随 MSVC 一起装的 MASM（`ml64`）。工程里有一份 x64 汇编。
