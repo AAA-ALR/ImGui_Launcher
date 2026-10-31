@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{44761d25-948b-4eee-bbd6-f164a4992c14}</ProjectGuid>
+    <RootNamespace>ImGuiLauncher</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <!-- 统一输出布局：最终产物 → Build\$(Configuration)\；中间产物 → Build\init\$(Configuration)\$(ProjectName)\ -->
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)Build\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)Build\init\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <!-- 公共编译设置：C++17；不加 /utf-8，保持执行字符集跟随系统 ANSI，配合 u8"" 策略 -->
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalIncludeDirectories>$(ProjectDir)src;$(ProjectDir)src\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.hpp</PrecompiledHeaderFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ManifestFile>$(IntDir)$(TargetName).manifest</ManifestFile>
+    </Link>
+    <Manifest>
+      <AdditionalManifestFiles>$(ProjectDir)ImGui_Launcher.manifest;%(AdditionalManifestFiles)</AdditionalManifestFiles>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <!-- 本项目源码 -->
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\window.cpp" />
+    <ClCompile Include="src\renderer_dx11.cpp" />
+    <ClCompile Include="src\effects\burst_background.cpp" />
+    <ClCompile Include="src\imgui\custom\imgui_layer.cpp" />
+    <ClCompile Include="src\effects\backdrop_blur.cpp" />
+    <ClCompile Include="src\pages\page_router.cpp" />
+    <ClCompile Include="src\task_queue.cpp" />
+    <ClInclude Include="src\misc\fnv1a.hpp" />
+    <ClInclude Include="src\task_queue.hpp" />
+    <ClCompile Include="src\pch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClInclude Include="src\pch.hpp" />
+    <ClInclude Include="src\window.hpp" />
+    <ClInclude Include="src\renderer_dx11.hpp" />
+    <ClInclude Include="src\effects\burst_background.hpp" />
+    <ClInclude Include="src\imgui\custom\imgui_layer.hpp" />
+    <ClInclude Include="src\effects\backdrop_blur.hpp" />
+    <ClInclude Include="src\pages\page_state.hpp" />
+    <ClInclude Include="src\pages\page_router.hpp" />
+    <ClInclude Include="src\shaders\hlsl_source.hpp" />
+    <!-- 自写控件（本项目风格，与第三方 ImGui 分开列） -->
+    <ClCompile Include="src\imgui\custom\child_title.cpp" />
+    <ClInclude Include="src\imgui\custom\child_title.hpp" />
+    <ClCompile Include="src\imgui\custom\widgets.cpp" />
+    <ClInclude Include="src\imgui\custom\widgets.hpp" />
+    <ClCompile Include="src\imgui\custom\toast.cpp" />
+    <ClInclude Include="src\imgui\custom\toast.hpp" />
+    <ClCompile Include="src\imgui\custom\loading.cpp" />
+    <ClInclude Include="src\imgui\custom\loading.hpp" />
+    <ClCompile Include="src\imgui\custom\loading_fx.cpp" />
+    <ClInclude Include="src\imgui\custom\loading_fx.hpp" />
+    <ClInclude Include="src\shaders\loading_fx_shaders.hpp" />
+    <!-- 标题辉光（HLSL 后期） -->
+    <ClCompile Include="src\imgui\custom\title_glow.cpp" />
+    <ClInclude Include="src\imgui\custom\title_glow.hpp" />
+    <ClInclude Include="src\shaders\title_glow_shaders.hpp" />
+    <ClCompile Include="src\imgui\custom\button_fx.cpp" />
+    <ClInclude Include="src\imgui\custom\button_fx.hpp" />
+    <ClInclude Include="src\shaders\button_fx_shaders.hpp" />
+    <!-- 内嵌字体（ASCII 子集 Montserrat ExtraBold） -->
+    <ClInclude Include="src\fonts\montserrat_extra_bold.hpp" />
+    <!-- 第三方：ImGui 1.93.1 WIP，不属于本项目风格，单独分组 -->
+    <ClCompile Include="src\imgui\imgui.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_draw.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_tables.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_widgets.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_demo.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_impl_win32.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_impl_dx11.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\imgui\imgui_stdlib.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClInclude Include="src\imgui\imgui.h" />
+    <ClInclude Include="src\imgui\imgui_internal.h" />
+    <ClInclude Include="src\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="src\imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="src\imgui\imgui_stdlib.h" />
+    <ClInclude Include="src\imgui\imstb_rectpack.h" />
+    <ClInclude Include="src\imgui\imstb_textedit.h" />
+    <ClInclude Include="src\imgui\imstb_truetype.h" />
+    <None Include="ImGui_Launcher.manifest" />
+    <MASM Include="src\misc\fnv1a.asm">
+      <FileType>Document</FileType>
+    </MASM>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
+  </ImportGroup>
+</Project>

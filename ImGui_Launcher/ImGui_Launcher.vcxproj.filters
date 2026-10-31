@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\pch.cpp" />
+    <ClCompile Include="src\window.cpp" />
+    <ClCompile Include="src\renderer_dx11.cpp" />
+    <ClCompile Include="src\imgui\imgui.cpp" />
+    <ClCompile Include="src\imgui\imgui_draw.cpp" />
+    <ClCompile Include="src\imgui\imgui_tables.cpp" />
+    <ClCompile Include="src\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="src\imgui\imgui_demo.cpp" />
+    <ClCompile Include="src\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="src\imgui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="src\imgui\imgui_stdlib.cpp" />
+    <ClCompile Include="src\effects\burst_background.cpp" />
+    <ClCompile Include="src\imgui\custom\imgui_layer.cpp" />
+    <ClCompile Include="src\effects\backdrop_blur.cpp" />
+    <ClCompile Include="src\pages\page_router.cpp" />
+    <ClCompile Include="src\task_queue.cpp" />
+    <ClCompile Include="src\imgui\custom\child_title.cpp" />
+    <ClCompile Include="src\imgui\custom\widgets.cpp" />
+    <ClCompile Include="src\imgui\custom\toast.cpp" />
+    <ClCompile Include="src\imgui\custom\loading.cpp" />
+    <ClCompile Include="src\imgui\custom\loading_fx.cpp" />
+    <ClCompile Include="src\imgui\custom\title_glow.cpp" />
+    <ClCompile Include="src\imgui\custom\button_fx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\pch.hpp" />
+    <ClInclude Include="src\window.hpp" />
+    <ClInclude Include="src\renderer_dx11.hpp" />
+    <ClInclude Include="src\imgui\imgui.h" />
+    <ClInclude Include="src\imgui\imgui_internal.h" />
+    <ClInclude Include="src\imgui\imgui_impl_win32.h" />
+    <ClInclude Include="src\imgui\imgui_impl_dx11.h" />
+    <ClInclude Include="src\imgui\imgui_stdlib.h" />
+    <ClInclude Include="src\imgui\imstb_rectpack.h" />
+    <ClInclude Include="src\imgui\imstb_textedit.h" />
+    <ClInclude Include="src\imgui\imstb_truetype.h" />
+    <ClInclude Include="src\task_queue.hpp" />
+    <ClInclude Include="src\effects\burst_background.hpp" />
+    <ClInclude Include="src\imgui\custom\imgui_layer.hpp" />
+    <ClInclude Include="src\effects\backdrop_blur.hpp" />
+    <ClInclude Include="src\pages\page_state.hpp" />
+    <ClInclude Include="src\pages\page_router.hpp" />
+    <ClInclude Include="src\shaders\hlsl_source.hpp" />
+    <ClInclude Include="src\imgui\custom\child_title.hpp" />
+    <ClInclude Include="src\imgui\custom\widgets.hpp" />
+    <ClInclude Include="src\imgui\custom\toast.hpp" />
+    <ClInclude Include="src\imgui\custom\loading.hpp" />
+    <ClInclude Include="src\imgui\custom\loading_fx.hpp" />
+    <ClInclude Include="src\shaders\loading_fx_shaders.hpp" />
+    <ClInclude Include="src\imgui\custom\title_glow.hpp" />
+    <ClInclude Include="src\shaders\title_glow_shaders.hpp" />
+    <ClInclude Include="src\imgui\custom\button_fx.hpp" />
+    <ClInclude Include="src\shaders\button_fx_shaders.hpp" />
+    <ClInclude Include="src\fonts\montserrat_extra_bold.hpp" />
+    <ClInclude Include="src\misc\fnv1a.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ImGui_Launcher.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="src\misc\fnv1a.asm" />
+  </ItemGroup>
+</Project>
